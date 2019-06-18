@@ -1,0 +1,157 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-info">
+        <div class="card-body pb-0">
+          <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="icon-location-pin"></i>
+          </button>
+          <div class="text-value">9.823</div>
+          <div>Members online</div>
+        </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+          <canvas baseChart class="chart"
+          [datasets]="lineChart2Data"
+          [labels]="lineChart2Labels"
+          [options]="lineChart2Options"
+          [colors]="lineChart2Colours"
+          [legend]="lineChart2Legend"
+          [chartType]="lineChart2Type"></canvas>
+        </div>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body pb-0">
+          <div class="btn-group float-right" dropdown>
+            <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+              <i class="icon-settings"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+          <div class="text-value">9.823</div>
+          <div>Members online</div>
+        </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+          <canvas baseChart class="chart"
+                  [datasets]="lineChart1Data"
+                  [labels]="lineChart1Labels"
+                  [options]="lineChart1Options"
+                  [colors]="lineChart1Colours"
+                  [legend]="lineChart1Legend"
+                  [chartType]="lineChart1Type"></canvas>
+        </div>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body pb-0">
+          <div class="btn-group float-right" dropdown>
+            <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+              <i class="icon-settings"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+          <div class="text-value">9.823</div>
+          <div>Members online</div>
+        </div>
+        <div class="chart-wrapper mt-3" style="height:70px;">
+          <canvas baseChart class="chart"
+          [datasets]="lineChart3Data"
+          [labels]="lineChart3Labels"
+          [options]="lineChart3Options"
+          [colors]="lineChart3Colours"
+          [legend]="lineChart3Legend"
+          [chartType]="lineChart3Type"></canvas>
+        </div>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-danger">
+        <div class="card-body pb-0">
+          <div class="btn-group float-right" dropdown>
+            <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
+              <i class="icon-settings"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+          <div class="text-value">9.823</div>
+          <div>Members online</div>
+        </div>
+        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+          <canvas baseChart class="chart"
+          [datasets]="barChart1Data"
+          [labels]="barChart1Labels"
+          [options]="barChart1Options"
+          [colors]="barChart1Colours"
+          [legend]="barChart1Legend"
+          [chartType]="barChart1Type"></canvas>
+        </div>
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          Discussions
+        </div>
+        <div class="card-body">
+          <form class="form" action="">
+            <p *ngIf="errorComment" style="color: red">Message invalid</p> 
+            <textarea #box name="" placeholder="Saisir votre message" class="form-control" id="commentId" rows="4"></textarea>
+            <button (click)="onPost(box.value)" class="btn btn-info">Envoyez</button>
+          </form>
+          <br>
+          <table class="table table-responsive-sm table-hover table-outline mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th class="text-center"><i class="icon-people"></i></th>
+                <th class="text-center"><i class="icon-envelope"></i></th>
+                <th class="text-center"><i class="icon-clock"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comment of comments">
+                <td class="text-center">
+                  <div class="avatar">
+                    <img *ngIf="currentUser.email == comment.user"  [src]="imgProfile" class="img-avatar" alt="admin@bootstrapmaster.com">
+                    <img  *ngIf="currentUser.email != comment.user"  [src]="otherProfile" class="img-avatar" alt="admin@bootstrapmaster.com">
+                    <span class="avatar-status badge-success"></span>
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="currentUser.email == comment.user" style="color: blue"> Moi </div>
+                  <div  *ngIf="currentUser.email != comment.user">{{comment.user}}</div>
+                  <div style="font-size: 14px;color: #969696;">
+                   {{comment.body}}
+                  </div>
+                  <div>
+                    <a *ngIf="currentUser.email == comment.user" (click)="onDelete(comment.id)" style="cursor: pointer;color: red;">Supprimer</a>
+                  </div>
+                </td>
+                <td>
+                  <p>{{comment.date}}</p>
+                </td>
+              </tr>         
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+</div>

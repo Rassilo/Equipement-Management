@@ -1,0 +1,53 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Simple Table
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Etat</th>
+                <th>Description</th>
+                <th>Panne</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of dataSource">
+                <td>{{item.key}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.status}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.panne}}</td>
+                <td>
+                  <a class="btn btn-sm btn-primary"[routerLink]="['/dashboard/equipment-details',item.title]"  href="#"> 
+                    Détails</a>
+                  <a *ngIf="isAuthorizedUpdate()" class="btn btn-sm btn-secondary" [routerLink]="['/dashboard/equipment-edit',item.title]">
+                    Modifier </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="pagination">
+            <li  class="page-item">
+              <a [ngClass]="{disabled: page ==1}" [routerLink]="['/dashboard/equipments']" [queryParams]="{page: +page-1}"  class="page-link" href="#">Prev</a>
+            </li>
+            <li *ngFor="let i of pages" class="page-item" [ngClass]="{active: page == i}">
+              <a [routerLink]="['/dashboard/equipments']" [queryParams]="{page: i}" class="page-link" >{{i}}</a>
+            </li>
+            <li class="page-item">
+              <a [ngClass]="{disabled: total == page}"  class="page-link" [routerLink]="['/dashboard/equipments']" [queryParams]="{page: +page+1}" >Next</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+</div>

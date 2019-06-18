@@ -1,0 +1,35 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      Description de l'équipement
+    </div>
+    <div class="card-body">
+      <div class="bd-example">
+        <dl class="row">
+          <dt class="col-sm-3">Identifiant</dt>
+          <dd class="col-sm-9">{{equipment.id}}</dd>
+
+          <dt class="col-sm-3">Nom</dt>
+          <dd class="col-sm-9">
+            {{equipment.title}}
+          </dd>
+
+          <dt class="col-sm-3">Etat</dt>
+          <dd class="col-sm-9">{{equipment.status}}</dd>
+
+          <dt class="col-sm-3 text-truncate">Panne</dt>
+          <dd class="col-sm-9">{{equipment.panne}}</dd>
+
+          <dt class="col-sm-3">Description</dt>
+          <dd class="col-sm-9">
+             {{equipment.description}} 
+          </dd>
+        </dl>
+      </div>
+      <a *ngIf="isAuthorized()" class="btn btn-sm btn-danger"(click)="deleteEquipment(equipment.title)" href="#"> 
+        Supprimer</a>
+      <a *ngIf="isAuthorizedUpdate()" class="btn btn-sm btn-info" [routerLink]="['/dashboard/equipment-edit',equipment.title]">
+        Modifier </a>
+    </div>
+  </div>
+</div>
